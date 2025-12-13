@@ -1,4 +1,4 @@
-* Base layout */ body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom right, #EEF2FF, #F3F4F6); color: #111827; margin: 0; padding: 0; }
+/* Base layout */ body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom right, #EEF2FF, #F3F4F6); color: #111827; margin: 0; padding: 0; }
 
 /* Header styling */ header { display: flex; justify-content: space-between; align-items: center; background-color: #1E3A8A; color: white; padding: 20px 30px; min-height: 120px; }
 
