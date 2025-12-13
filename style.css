@@ -14,9 +14,11 @@ nav a:hover { text-decoration: underline; }
 
 .highlight { font-size: 2em; color: #F59E0B; margin-top: 10px; }
 
-/* Game results layout */ .other-results { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 900px; margin: 30px auto; padding: 0 10px; }
+/* Game results layout with landmark SVG icons */ .other-results { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 900px; margin: 30px auto; padding: 0 10px; }
 
-.game { background-color: #d1d5db; /* Tailwind gray-300 / color: #1e3a8a; / Dark blue for game name / border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 140px; display: flex; flex-direction: column; align-items: center; font-weight: 600; position: relative; clip-path: polygon( / different shapes for variety */ 10% 0%, 90% 0%, 100% 20%, 100% 80%, 90% 100%, 10% 100%, 0% 80%, 0% 20% ); }
+.game { background-color: #d1d5db; /* Tailwind gray-300 / color: #1e3a8a; / Dark blue for game name / border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 140px; display: flex; flex-direction: column; align-items: center; font-weight: 600; position: relative; clip-path: polygon( / abstract building shape */ 10% 0%, 90% 0%, 100% 20%, 100% 80%, 90% 100%, 10% 100%, 0% 80%, 0% 20% ); }
+
+.game svg { margin-bottom: 10px; width: 40px; height: 60px; fill: #1E3A8A; }
 
 .game-name { font-size: 1.1em; margin-bottom: 10px; color: #1e40af; /* darker blue */ text-align: center; }
 
