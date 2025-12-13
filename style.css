@@ -1,79 +1,21 @@
-/* Base layout */
-body {
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(to bottom right, #EEF2FF, #F3F4F6);
-  color: #111827;
-  margin: 0;
-  padding: 0;
-}
+* Base layout */ body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom right, #EEF2FF, #F3F4F6); color: #111827; margin: 0; padding: 0; }
 
-/* Header styling */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #1E3A8A;
-  color: white;
-  padding: 20px 30px;
-  min-height: 120px;
-}
+/* Header styling */ header { display: flex; justify-content: space-between; align-items: center; background-color: #1E3A8A; color: white; padding: 20px 30px; min-height: 120px; }
 
-/* Logo image */
-.logo img {
-  height: 100px;
-  max-width: 100%;
-  object-fit: contain;
-}
+/* Logo image */ .logo img { height: 150px; max-width: 100%; object-fit: contain; }
 
-/* Navigation links */
-nav a {
-  margin-left: 15px;
-  color: #FBBF24;
-  text-decoration: none;
-  font-weight: 600;
-}
+/* Navigation links */ nav a { margin-left: 15px; color: #FBBF24; text-decoration: none; font-weight: 600; }
 
-nav a:hover {
-  text-decoration: underline;
-}
+nav a:hover { text-decoration: underline; }
 
-/* Main result section */
-.main-result {
-  text-align: center;
-  padding: 30px;
-}
+/* Main result section */ .main-result { text-align: center; padding: 30px; }
 
-.main-result h1 {
-  font-size: 2.5em;
-  color: #1E3A8A;
-}
+.main-result h1 { font-size: 2.5em; color: #1E3A8A; }
 
-.highlight {
-  font-size: 2em;
-  color: #F59E0B;
-  margin-top: 10px;
-}
+.highlight { font-size: 2em; color: #F59E0B; margin-top: 10px; }
 
-/* Game results layout */
-.other-results {
-  padding: 20px;
-  max-width: 600px;
-  margin: auto;
-}
+/* Game results layout */ .other-results { padding: 20px; max-width: 600px; margin: auto; }
 
-.game {
-  background-color: white;
-  margin: 10px 0;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  font-weight: 500;
-}
+.game { background-color: white; margin: 10px 0; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500; }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px;
-  font-size: 0.875em;
-  color: #6B7280;
-}
+/* Footer */ footer { text-align: center; padding: 20px; font-size: 0.875em; color: #6B7280; }
