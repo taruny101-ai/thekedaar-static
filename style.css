@@ -1,46 +1,62 @@
-/* Base layout */
+/* Mobile-first base layout */
 body {
   margin: 0;
   padding: 0;
-  background-image: url("Eiffel.png"); /* ✅ Make sure the file is in the same folder as your CSS */
-  background-size: cover;              /* ✅ Image covers the whole screen */
-  background-repeat: no-repeat;        /* ✅ Prevent tiling */
-  background-position: center;         /* ✅ Center the image */
-  background-attachment: fixed;        /* ✅ Parallax-style fixed background */
+  font-family: Arial, sans-serif;
+
+  background-image: url("Eiffel.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* Header styling */
+/* Header */
 header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column; /* ✅ Mobile-friendly stacking */
   align-items: center;
-  background-color: rgba(30, 58, 138, 0.85); /* ✅ Slight transparency looks better on image */
-  color: white;
-  padding: 20px 30px;
-  min-height: 120px;
+  padding: 15px;
+  background-color: rgba(30, 58, 138, 0.85);
 }
 
-/* Logo container */
-.logo {
-  flex-shrink: 0; /* prevents flexbox from squeezing the logo */
-}
-
-/* Logo image */
+/* Logo */
 .logo img {
-  width: 220px;   /* adjust this to your preferred size */
+  width: 150px;   /* ✅ Mobile-optimized size */
   height: auto;
-  max-width: none; /* removes the limiting 100% rule */
-  object-fit: contain;
+  margin-bottom: 10px;
 }
 
-/* Navigation links */
+/* Navigation */
+nav {
+  display: flex;
+  gap: 15px;
+}
+
 nav a {
-  margin-left: 15px;
   color: #FBBF24;
   text-decoration: none;
   font-weight: 600;
+  font-size: 16px; /* ✅ Good for mobile readability */
 }
 
+nav a:active,
 nav a:hover {
   text-decoration: underline;
+}
+
+/* Hero section */
+.hero {
+  text-align: center;
+  padding: 40px 20px;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+}
+
+.hero h1 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 16px;
 }
