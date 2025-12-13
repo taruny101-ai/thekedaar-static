@@ -1,158 +1,29 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
-  color: #222;
-}
+<div class="bg-gray-100 text-gray-900 font-sans">
+  <header class="flex justify-between items-center bg-indigo-800 text-white p-4">
+    <img src="logo.png" alt="Logo" class="h-12">
+    <nav class="space-x-4">
+      <a href="#privacy" class="text-amber-400">Privacy Policy</a>
+      <a href="#disclaimer" class="text-amber-400">Disclaimer</a>
+      <a href="#terms" class="text-amber-400">Terms of Service</a>
+    </nav>
+  </header>
 
-/* Header */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  padding: 12px 24px;
-  border-bottom: 1px solid #ccc;
-}
+  <main class="text-center py-6">
+    <h1 class="text-3xl font-bold text-indigo-800">Thekedaar</h1>
+    <p class="text-2xl text-amber-500">Result: 123</p>
 
-.logo {
-  height: 40px;
-}
+    <div class="mt-6 space-y-2 px-4">
+      <div class="bg-white p-4 rounded shadow">Game 1 - Result: 456</div>
+      <div class="bg-white p-4 rounded shadow">Game 2 - Result: 789</div>
+      <div class="bg-white p-4 rounded shadow">Game 3 - Result: 234</div>
+      <div class="bg-white p-4 rounded shadow">Game 4 - Result: 567</div>
+      <div class="bg-white p-4 rounded shadow">Game 5 - Result: 890</div>
+      <div class="bg-white p-4 rounded shadow">Game 6 - Result: 345</div>
+      <div class="bg-white p-4 rounded shadow">Game 7 - Result: 678</div>
+    </div>
+  </main>
 
-.nav-links a {
-  margin-left: 16px;
-  text-decoration: none;
-  color: #1976d2;
-  font-size: 14px;
-}
-
-/* Hero section with cube background */
-.hero {
-  height: 280px;
-  background-image: url("assets/cubes-bg.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-/* Mid section */
-.mid-section {
-  padding: 24px;
-  text-align: center;
-}
-
-.date-label {
-  font-weight: bold;
-  margin-bottom: 12px;
-  font-size: 18px;
-}
-
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 16px;
-  margin-top: 12px;
-}
-
-.game-card {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 12px;
-  font-weight: bold;
-}
-
-.result {
-  display: block;
-  margin-top: 8px;
-  font-size: 20px;
-  color: #d32f2f;
-}
-
-/* Monthly chart */
-.chart-section {
-  padding: 24px;
-}
-
-.chart-section h2 {
-  background: #1abc9c;
-  color: white;
-  padding: 12px;
-  font-size: 18px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 12px;
-}
-
-th, td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: center;
-}
-
-.chart-nav {
-  margin-top: 12px;
-}
-
-.chart-nav button {
-  margin-right: 8px;
-  padding: 6px 12px;
-  background: #1976d2;
-  color: white;
-  border: none;
-  border-radius: 4px;
-}
-
-.chart-picker {
-  margin-top: 12px;
-}
-
-.chart-picker select {
-  margin: 0 8px;
-  padding: 4px;
-}
-
-/* Footer */
-footer {
-  background: #333;
-  color: white;
-  text-align: center;
-  padding: 16px;
-  font-size: 14px;
-}
-
-footer a {
-  color: #90caf9;
-  margin: 0 8px;
-  text-decoration: none;
-}
-
-/* Legal pages */
-.legal-page {
-  max-width: 900px;
-  margin: 24px auto;
-  padding: 0 16px 48px;
-  line-height: 1.6;
-}
-
-.legal-page h1 {
-  font-size: 28px;
-  margin-bottom: 8px;
-}
-
-.legal-page .effective {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 16px;
-}
-
-.legal-page h2 {
-  font-size: 18px;
-  margin-top: 18px;
-}
-
-.legal-page ul {
-  padding-left: 20px;
-}
+  <footer class="text-center py-4 text-sm text-gray-500">
+    © 2025 Thekedaar Results
+  </footer>
+</div>
