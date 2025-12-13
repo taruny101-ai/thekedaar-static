@@ -60,3 +60,48 @@ nav a:hover {
 .hero p {
   font-size: 16px;
 }
+
+/* Game Results Section */
+.results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Each game as a light-blue circle */
+.game {
+  width: 130px;
+  height: 130px;
+  background-color: #ADD8E6; /* Light blue */
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+  font-family: inherit;
+}
+
+/* Text inside each circle */
+.game-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.game-score {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Slightly larger circles on wider screens */
+@media (min-width: 480px) {
+  .game {
+    width: 150px;
+    height: 150px;
+  }
+}
