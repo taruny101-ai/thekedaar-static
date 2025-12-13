@@ -13,7 +13,7 @@ body {
 /* Header */
 header {
   display: flex;
-  flex-direction: column; /* ✅ Mobile-friendly stacking */
+  flex-direction: column;
   align-items: center;
   padding: 15px;
   background-color: rgba(30, 58, 138, 0.85);
@@ -21,7 +21,7 @@ header {
 
 /* Logo */
 .logo img {
-  width: 150px;   /* ✅ Mobile-optimized size */
+  width: 150px;
   height: auto;
   margin-bottom: 10px;
 }
@@ -36,7 +36,7 @@ nav a {
   color: #FBBF24;
   text-decoration: none;
   font-weight: 600;
-  font-size: 16px; /* ✅ Good for mobile readability */
+  font-size: 16px;
 }
 
 nav a:active,
@@ -61,12 +61,35 @@ nav a:hover {
   font-size: 16px;
 }
 
+/* Main Result Section */
+.main-result {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+/* ✅ Multicolor Thekedaar title */
+.multicolor-title {
+  font-size: 36px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #FF5733, #FFC300, #28B463, #3498DB, #9B59B6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+/* ✅ Highlighted result dash */
+.highlight {
+  font-size: 24px;
+  font-weight: 600;
+  color: #FBBF24;
+}
+
 /* Game Results Section */
 .results-container {
   display: flex;
-  flex-wrap: wrap;        /* ✅ allows items to form rows */
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 20px 30px;         /* ✅ vertical + horizontal spacing */
+  gap: 20px 30px;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -75,7 +98,7 @@ nav a:hover {
 .game {
   width: 130px;
   height: 130px;
-  background-color: #ADD8E6; /* Light blue */
+  background-color: #ADD8E6;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
