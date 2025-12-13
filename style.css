@@ -1,7 +1,7 @@
 /* Base layout */
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #F3F4F6;
+  background: linear-gradient(to bottom right, #EEF2FF, #F3F4F6);
   color: #111827;
   margin: 0;
   padding: 0;
