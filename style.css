@@ -15,12 +15,14 @@ header {
   background-color: #1E3A8A;
   color: white;
   padding: 20px 30px;
+  min-height: 120px;
 }
 
 /* Logo image */
 .logo img {
-  height: 80px;
-  max-width: 200px;
+  height: 100px;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 /* Navigation links */
