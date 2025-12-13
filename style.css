@@ -1,9 +1,20 @@
-/* Base layout */ body { /* Header styling */
+/* Base layout */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("Eiffel.png"); /* ✅ Make sure the file is in the same folder as your CSS */
+  background-size: cover;              /* ✅ Image covers the whole screen */
+  background-repeat: no-repeat;        /* ✅ Prevent tiling */
+  background-position: center;         /* ✅ Center the image */
+  background-attachment: fixed;        /* ✅ Parallax-style fixed background */
+}
+
+/* Header styling */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1E3A8A;
+  background-color: rgba(30, 58, 138, 0.85); /* ✅ Slight transparency looks better on image */
   color: white;
   padding: 20px 30px;
   min-height: 120px;
