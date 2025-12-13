@@ -2,7 +2,7 @@
 
 /* Header styling */ header { display: flex; justify-content: space-between; align-items: center; background-color: #1E3A8A; color: white; padding: 20px 30px; min-height: 120px; }
 
-/* Logo image */ .logo img { height: 150px; max-width: 100%; object-fit: contain; }
+/* Logo image */ .logo img { height: 500px; max-width: 100%; object-fit: contain; }
 
 /* Navigation links */ nav a { margin-left: 15px; color: #FBBF24; text-decoration: none; font-weight: 600; }
 
