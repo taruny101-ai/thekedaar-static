@@ -1,29 +1,76 @@
-<div class="bg-gray-100 text-gray-900 font-sans">
-  <header class="flex justify-between items-center bg-indigo-800 text-white p-4">
-    <img src="logo.png" alt="Logo" class="h-12">
-    <nav class="space-x-4">
-      <a href="#privacy" class="text-amber-400">Privacy Policy</a>
-      <a href="#disclaimer" class="text-amber-400">Disclaimer</a>
-      <a href="#terms" class="text-amber-400">Terms of Service</a>
-    </nav>
-  </header>
+/* Base layout */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #F3F4F6;
+  color: #111827;
+  margin: 0;
+  padding: 0;
+}
 
-  <main class="text-center py-6">
-    <h1 class="text-3xl font-bold text-indigo-800">Thekedaar</h1>
-    <p class="text-2xl text-amber-500">Result: 123</p>
+/* Header styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1E3A8A;
+  color: white;
+  padding: 10px 20px;
+}
 
-    <div class="mt-6 space-y-2 px-4">
-      <div class="bg-white p-4 rounded shadow">Game 1 - Result: 456</div>
-      <div class="bg-white p-4 rounded shadow">Game 2 - Result: 789</div>
-      <div class="bg-white p-4 rounded shadow">Game 3 - Result: 234</div>
-      <div class="bg-white p-4 rounded shadow">Game 4 - Result: 567</div>
-      <div class="bg-white p-4 rounded shadow">Game 5 - Result: 890</div>
-      <div class="bg-white p-4 rounded shadow">Game 6 - Result: 345</div>
-      <div class="bg-white p-4 rounded shadow">Game 7 - Result: 678</div>
-    </div>
-  </main>
+/* Logo image */
+.logo img {
+  height: 50px;
+}
 
-  <footer class="text-center py-4 text-sm text-gray-500">
-    © 2025 Thekedaar Results
-  </footer>
-</div>
+/* Navigation links */
+nav a {
+  margin-left: 15px;
+  color: #FBBF24;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Main result section */
+.main-result {
+  text-align: center;
+  padding: 30px;
+}
+
+.main-result h1 {
+  font-size: 2.5em;
+  color: #1E3A8A;
+}
+
+.highlight {
+  font-size: 2em;
+  color: #F59E0B;
+  margin-top: 10px;
+}
+
+/* Game results layout */
+.other-results {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.game {
+  background-color: white;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-weight: 500;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.875em;
+  color: #6B7280;
+}
