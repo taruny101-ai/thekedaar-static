@@ -1,0 +1,199 @@
+/* ----------------------------------------------
+BASE LAYOUT
+---------------------------------------------- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("Eiffel.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* ----------------------------------------------
+HEADER
+---------------------------------------------- */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background-color: rgba(30, 58, 138, 0.85);
+}
+
+.logo img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+nav {
+  display: flex;
+  gap: 15px;
+}
+
+nav a {
+  color: #FBBF24;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* ----------------------------------------------
+TITLE
+---------------------------------------------- */
+h1 {
+  text-align: center;
+  font-size: 3em;
+  margin-top: 40px;
+  background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc, #ffcc00);
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: shimmer 3s linear infinite, glow 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 10px #fff, 0 0 20px #ff00cc, 0 0 30px #3333ff; }
+  50% { text-shadow: 0 0 20px #fff, 0 0 30px #00ffcc, 0 0 40px #ffcc00; }
+}
+
+/* ----------------------------------------------
+THEKEDAAR MAIN SCORE (NEW)
+---------------------------------------------- */
+.main-score {
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 900;
+  color: gold;                 /* ✅ Golden color */
+  margin-top: 20px;
+  text-shadow: 
+      0 0 10px gold,
+      0 0 20px #ffcc00,
+      0 0 30px #ffaa00;        /* ✅ Golden glow */
+  animation: glow 1.5s ease-in-out infinite;
+}
+
+/* ----------------------------------------------
+CIRCLE LAYOUT
+---------------------------------------------- */
+.circle-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 20px;
+}
+
+.circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #ADD8E6; /* ✅ Light Blue */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+  transition: transform 0.3s ease;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.circle:hover {
+  transform: scale(1.1);
+}
+
+.score {
+  font-size: 20px;
+  font-weight: 900;
+  margin-top: 5px;
+}
+
+/* ----------------------------------------------
+DATE (NEW)
+---------------------------------------------- */
+#current-date {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: gold;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
+/* ----------------------------------------------
+RESPONSIVE
+---------------------------------------------- */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2em;
+    margin-top: 20px;
+  }
+
+  .circle {
+    width: 90px;
+    height: 90px;
+    font-size: 12px;
+  }
+
+  .score {
+    font-size: 16px;
+  }
+
+  .main-score {
+    font-size: 2em;
+  }
+
+  #current-date {
+    font-size: 22px;
+  }
+}
+
+/* ----------------------------------------------
+FIREWORK PARTICLES
+---------------------------------------------- */
+.firework {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: burst 1s ease-out forwards;
+}
+
+@keyframes burst {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.firework::after {
+  content: "✦";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  font-size: 12px;
+  color: gold;
+  animation: sparkle 1s ease-out forwards;
+}
+
+@keyframes sparkle {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(2); }
+}
