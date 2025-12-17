@@ -5,10 +5,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-image: url("Eiffel.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: #0A0A0A; /* ✅ Premium dark background */
   color: white;
   overflow-x: hidden;
 }
