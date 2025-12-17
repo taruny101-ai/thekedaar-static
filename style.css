@@ -47,9 +47,9 @@ nav a:hover {
 }
 
 /* ----------------------------------------------
-TITLE
+HOMEPAGE TITLE (ONLY THIS GLOWS)
 ---------------------------------------------- */
-h1 {
+#title {
   text-align: center;
   font-size: 3em;
   margin-top: 40px;
@@ -72,19 +72,30 @@ h1 {
 }
 
 /* ----------------------------------------------
-THEKEDAAR MAIN SCORE (NEW)
+LEGAL PAGE TITLES (NO GLOW)
+---------------------------------------------- */
+.legal-title {
+  text-align: center;
+  font-size: 2.5em;
+  margin-top: 40px;
+  color: #FBBF24;
+  text-shadow: none !important;
+  animation: none !important;
+}
+
+/* ----------------------------------------------
+MAIN SCORE
 ---------------------------------------------- */
 .main-score {
   text-align: center;
   font-size: 2.5em;
   font-weight: 900;
-  color: gold;                 /* ✅ Golden color */
+  color: gold;
   margin-top: 20px;
-  text-shadow: 
+  text-shadow:
       0 0 10px gold,
       0 0 20px #ffcc00,
-      0 0 30px #ffaa00;        /* ✅ Golden glow */
-  animation: glow 1.5s ease-in-out infinite;
+      0 0 30px #ffaa00;
 }
 
 /* ----------------------------------------------
@@ -102,7 +113,7 @@ CIRCLE LAYOUT
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: #ADD8E6; /* ✅ Light Blue */
+  background: #ADD8E6;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
   transition: transform 0.3s ease;
   color: black;
@@ -126,22 +137,23 @@ CIRCLE LAYOUT
 }
 
 /* ----------------------------------------------
-DATE (NEW)
+DATE
 ---------------------------------------------- */
 #current-date {
   text-align: center;
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 900;
   color: gold;
   margin-top: 60px;
   margin-bottom: 20px;
+  text-shadow: 0 0 10px gold;
 }
 
 /* ----------------------------------------------
 RESPONSIVE
 ---------------------------------------------- */
 @media (max-width: 600px) {
-  h1 {
+  #title {
     font-size: 2em;
     margin-top: 20px;
   }
@@ -161,7 +173,7 @@ RESPONSIVE
   }
 
   #current-date {
-    font-size: 22px;
+    font-size: 24px;
   }
 }
 
