@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css" />
   <meta http-equiv="refresh" content="30" />
 </head>
+
 <body>
 
   <!-- HEADER -->
@@ -25,18 +26,18 @@
   <!-- TITLE -->
   <h1 id="title">Thekedaar</h1>
 
-  <!-- ✅ Thekedaar Score -->
+  <!-- MAIN SCORE -->
   <div id="main-score" class="main-score">—</div>
 
-  <!-- ✅ Circle Results -->
+  <!-- CIRCLE RESULTS -->
   <div class="circle-container" id="results"></div>
 
-  <!-- ✅ Date -->
+  <!-- DATE -->
   <div id="current-date"></div>
 
-  <!-- ✅ Google Sheets API v4 -->
+  <!-- GOOGLE SHEETS API -->
   <script>
-    const apiKey = "AIzaSyA6MZr97k_P2vLEd3izI3F7UZLJMCvE6WA"; // 🔒 Paste your API key here
+    const apiKey = "YOUR_KEY_HERE";
     const sheetId = "1UIFwICEddQE5XtMz_Wod3Gp0H6TQwTvE2TCeXw77-sQ";
     const tabName = "results";
 
@@ -62,7 +63,6 @@
             circle.className = "circle";
 
             const name = document.createElement("span");
-            name.className = "name";
             name.textContent = game;
 
             const value = document.createElement("span");
@@ -92,7 +92,7 @@
     updateDate();
   </script>
 
-  <!-- ✅ Fireworks -->
+  <!-- FIREWORKS -->
   <script>
     function createFirework() {
       const firework = document.createElement("div");
