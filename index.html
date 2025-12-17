@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thekedaar Results</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta http-equiv="refresh" content="30" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <img src="assets/logo.png" alt="Thekedaar Logo" />
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+    </nav>
+  </header>
+
+  <!-- TITLE -->
+  <h1 id="title">Thekedaar</h1>
+
+  <!-- ✅ Thekedaar Score -->
+  <div id="main-score" class="main-score">—</div>
+
+  <!-- ✅ Circle Results -->
+  <div class="circle-container" id="results"></div>
+
+  <!-- ✅ Date -->
+  <div id="current-date"></div>
+
+  <!-- ✅ Google Sheets API v4 -->
+  <script>
+    const apiKey = "AIzaSyA6MZr97k_P2vLEd3izI3F7UZLJMCvE6WA"; // 🔒 Paste your API key here
+    const sheetId = "1UIFwICEddQE5XtMz_Wod3Gp0H6TQwTvE2TCeXw77-sQ";
+    const tabName = "results";
+
+    async function loadResults() {
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${tabName}?key=${apiKey}`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        const rows = data.values;
+
+        const container = document.getElementById("results");
+        const mainScore = document.getElementById("main-score");
+        container.innerHTML = "";
+
+        rows.forEach(row => {
+          const game = row[0];
+          const score = row[1] || "—";
+
+          if (game?.toLowerCase() === "thekedaar") {
+            mainScore.textContent = score;
+          } else {
+            const circle = document.createElement("div");
+            circle.className = "circle";
+
+            const name = document.createElement("span");
+            name.className = "name";
+            name.textContent = game;
+
+            const value = document.createElement("span");
+            value.className = "score";
+            value.textContent = score;
+
+            circle.appendChild(name);
+            circle.appendChild(value);
+            container.appendChild(circle);
+          }
+        });
+      } catch (error) {
+        console.error("Error loading results:", error);
+      }
+    }
+
+    function updateDate() {
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const year = now.getFullYear();
+      const formatted = `${day}/${month}/${year} IST`;
+      document.getElementById("current-date").textContent = formatted;
+    }
+
+    loadResults();
+    updateDate();
+  </script>
+
+  <!-- ✅ Fireworks -->
+  <script>
+    function createFirework() {
+      const firework = document.createElement("div");
+      firework.classList.add("firework");
+      firework.style.left = Math.random() * window.innerWidth + "px";
+      firework.style.top = Math.random() * window.innerHeight + "px";
+      document.body.appendChild(firework);
+      setTimeout(() => firework.remove(), 1000);
+    }
+    setInterval(createFirework, 800);
+  </script>
+
+</body>
+</html>
