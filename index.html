@@ -35,14 +35,19 @@
   <!-- DATE -->
   <div id="current-date"></div>
 
+  <!-- CHART TAB -->
+  <h2>Chart</h2>
+  <div id="chart-data"></div>
+
   <!-- GOOGLE SHEETS API -->
   <script>
-    const apiKey = "AIzaSyA6MZr97k_P2vLEd3izI3F7UZLJMCvE6WA";
+    const apiKey = "AIzaSyA6MZr97k_P2vLEd3izI3F7UZLJMCvE6WA"; // your API key here
     const sheetId = "1UIFwICEddQE5XtMz_Wod3Gp0H6TQwTvE2TCeXw77-sQ";
-    const tabName = "results";
+    const resultsTab = "results";
+    const chartTab = "chart";
 
     async function loadResults() {
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${tabName}?key=${apiKey}`;
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${resultsTab}?key=${apiKey}`;
       try {
         const response = await fetch(url);
         const data = await response.json();
@@ -79,6 +84,29 @@
       }
     }
 
+    async function loadChart() {
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${chartTab}?key=${apiKey}`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        const rows = data.values;
+
+        let html = "<table border='1'>";
+        rows.forEach(row => {
+          html += "<tr>";
+          row.forEach(cell => {
+            html += `<td>${cell}</td>`;
+          });
+          html += "</tr>";
+        });
+        html += "</table>";
+
+        document.getElementById("chart-data").innerHTML = html;
+      } catch (error) {
+        console.error("Error loading chart:", error);
+      }
+    }
+
     function updateDate() {
       const now = new Date();
       const day = String(now.getDate()).padStart(2, '0');
@@ -89,6 +117,7 @@
     }
 
     loadResults();
+    loadChart();
     updateDate();
   </script>
 
