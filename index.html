@@ -25,6 +25,12 @@
   <h2>Results Viewer</h2>
 
   <!-- Dropdowns -->
+  <label for="viewMode">View Mode:</label>
+  <select id="viewMode">
+    <option value="yearly">Yearly</option>
+    <option value="monthly">Monthly</option>
+  </select>
+
   <label for="yearSelect">Year:</label>
   <select id="yearSelect"></select>
 
@@ -44,6 +50,7 @@
       "2026": { "Jan": 14, "Feb": 19 } // current year, partial months
     };
 
+    const viewMode = document.getElementById("viewMode");
     const yearSelect = document.getElementById("yearSelect");
     const monthSelect = document.getElementById("monthSelect");
     const currentYear = new Date().getFullYear();
@@ -89,27 +96,46 @@
       });
     }
 
-    function updateChart(year, month) {
-      chart.data.labels = [month];
-      chart.data.datasets[0].data = [resultsData[year][month]];
+    function updateChart() {
+      const year = yearSelect.value;
+      const mode = viewMode.value;
+
+      if (mode === "yearly") {
+        chart.config.type = "line"; // yearly view as line chart
+        chart.data.labels = Object.keys(resultsData[year]);
+        chart.data.datasets[0].data = Object.values(resultsData[year]);
+      } else {
+        chart.config.type = "bar"; // monthly view as bar chart
+        const month = monthSelect.value;
+        chart.data.labels = [month];
+        chart.data.datasets[0].data = [resultsData[year][month]];
+      }
       chart.update();
     }
 
     // Event listeners
+    viewMode.addEventListener("change", () => {
+      if (viewMode.value === "yearly") {
+        monthSelect.style.display = "none";
+      } else {
+        monthSelect.style.display = "inline-block";
+      }
+      updateChart();
+    });
+
     yearSelect.addEventListener("change", () => {
       updateMonths(yearSelect.value);
-      updateChart(yearSelect.value, monthSelect.value);
+      updateChart();
     });
 
-    monthSelect.addEventListener("change", () => {
-      updateChart(yearSelect.value, monthSelect.value);
-    });
+    monthSelect.addEventListener("change", updateChart);
 
-    // Initialize with current year/month
+    // Initialize with current year in yearly mode
     yearSelect.value = currentYear;
     updateMonths(currentYear);
     monthSelect.value = Object.keys(resultsData[currentYear])[0];
-    updateChart(currentYear, monthSelect.value);
+    monthSelect.style.display = "none"; // hide initially for yearly mode
+    updateChart();
   </script>
 </body>
 </html>
