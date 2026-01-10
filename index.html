@@ -1,147 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-N5ND5KQVH3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-N5ND5KQVH3');
-</script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thekedaar Results</title>
-  <link rel="stylesheet" href="style.css" />
-  <meta http-equiv="refresh" content="30" />
+  <meta charset="UTF-8">
+  <title>Results Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    label {
+      margin-right: 10px;
+    }
+    select {
+      margin-right: 20px;
+      padding: 5px;
+    }
+    canvas {
+      margin-top: 20px;
+    }
+  </style>
 </head>
-
 <body>
+  <h2>Results Viewer</h2>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">
-      <img src="assets/logo.png" alt="Thekedaar Logo" />
-    </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="disclaimer.html">Disclaimer</a>
-      <a href="terms-of-service.html">Terms of Service</a>
-    </nav>
-  </header>
+  <!-- Dropdowns -->
+  <label for="yearSelect">Year:</label>
+  <select id="yearSelect"></select>
 
-  <!-- TITLE -->
-  <h1 id="title">Thekedaar</h1>
+  <label for="monthSelect">Month:</label>
+  <select id="monthSelect"></select>
 
-  <!-- MAIN SCORE -->
-  <div id="main-score" class="main-score">—</div>
+  <!-- Chart -->
+  <canvas id="resultsChart" width="600" height="400"></canvas>
 
-  <!-- CIRCLE RESULTS -->
-  <div class="circle-container" id="results"></div>
-
-  <!-- DATE -->
-  <div id="current-date"></div>
-
-  <!-- CHART TAB -->
-  <h2>Chart</h2>
-  <div id="chart-data"></div>
-
-  <!-- GOOGLE SHEETS API -->
   <script>
-    const apiKey = "AIzaSyA6MZr97k_P2vLEd3izI3F7UZLJMCvE6WA"; // your API key here
-    const sheetId = "1UIFwICEddQE5XtMz_Wod3Gp0H6TQwTvE2TCeXw77-sQ";
-    const resultsTab = "results";
-    const chartTab = "chart";
+    // Example dataset (replace with your actual data or API response)
+    const resultsData = {
+      "2022": { "Jan": 12, "Feb": 18, "Mar": 25, "Apr": 30, "May": 22 },
+      "2023": { "Jan": 20, "Feb": 30, "Mar": 40, "Apr": 50, "May": 35 },
+      "2024": { "Jan": 15, "Feb": 22, "Mar": 35, "Apr": 45, "May": 28 },
+      "2025": { "Jan": 10, "Feb": 28, "Mar": 45, "Apr": 55, "May": 42 },
+      "2026": { "Jan": 14, "Feb": 19 } // current year, partial months
+    };
 
-    async function loadResults() {
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${resultsTab}?key=${apiKey}`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        const rows = data.values;
+    const yearSelect = document.getElementById("yearSelect");
+    const monthSelect = document.getElementById("monthSelect");
+    const currentYear = new Date().getFullYear();
 
-        const container = document.getElementById("results");
-        const mainScore = document.getElementById("main-score");
-        container.innerHTML = "";
+    // Populate year dropdown dynamically
+    for (let year = 2022; year <= currentYear; year++) {
+      let opt = document.createElement("option");
+      opt.value = year;
+      opt.textContent = year;
+      yearSelect.appendChild(opt);
+    }
 
-        rows.forEach(row => {
-          const game = row[0];
-          const score = row[1] || "—";
-
-          if (game?.toLowerCase() === "thekedaar") {
-            mainScore.textContent = score;
-          } else {
-            const circle = document.createElement("div");
-            circle.className = "circle";
-
-            const name = document.createElement("span");
-            name.textContent = game;
-
-            const value = document.createElement("span");
-            value.className = "score";
-            value.textContent = score;
-
-            circle.appendChild(name);
-            circle.appendChild(value);
-            container.appendChild(circle);
-          }
-        });
-      } catch (error) {
-        console.error("Error loading results:", error);
+    // Chart initialization
+    const ctx = document.getElementById("resultsChart").getContext("2d");
+    let chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: [],
+        datasets: [{
+          label: "Results",
+          data: [],
+          backgroundColor: "rgba(75, 192, 192, 0.6)"
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: true }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
       }
+    });
+
+    function updateMonths(year) {
+      monthSelect.innerHTML = "";
+      Object.keys(resultsData[year]).forEach(month => {
+        let opt = document.createElement("option");
+        opt.value = month;
+        opt.textContent = month;
+        monthSelect.appendChild(opt);
+      });
     }
 
-    async function loadChart() {
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${chartTab}?key=${apiKey}`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        const rows = data.values;
-
-        let html = "<table border='1'>";
-        rows.forEach(row => {
-          html += "<tr>";
-          row.forEach(cell => {
-            html += `<td>${cell}</td>`;
-          });
-          html += "</tr>";
-        });
-        html += "</table>";
-
-        document.getElementById("chart-data").innerHTML = html;
-      } catch (error) {
-        console.error("Error loading chart:", error);
-      }
+    function updateChart(year, month) {
+      chart.data.labels = [month];
+      chart.data.datasets[0].data = [resultsData[year][month]];
+      chart.update();
     }
 
-    function updateDate() {
-      const now = new Date();
-      const day = String(now.getDate()).padStart(2, '0');
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const year = now.getFullYear();
-      const formatted = `${day}/${month}/${year} IST`;
-      document.getElementById("current-date").textContent = formatted;
-    }
+    // Event listeners
+    yearSelect.addEventListener("change", () => {
+      updateMonths(yearSelect.value);
+      updateChart(yearSelect.value, monthSelect.value);
+    });
 
-    loadResults();
-    loadChart();
-    updateDate();
+    monthSelect.addEventListener("change", () => {
+      updateChart(yearSelect.value, monthSelect.value);
+    });
+
+    // Initialize with current year/month
+    yearSelect.value = currentYear;
+    updateMonths(currentYear);
+    monthSelect.value = Object.keys(resultsData[currentYear])[0];
+    updateChart(currentYear, monthSelect.value);
   </script>
-
-  <!-- FIREWORKS -->
-  <script>
-    function createFirework() {
-      const firework = document.createElement("div");
-      firework.classList.add("firework");
-      firework.style.left = Math.random() * window.innerWidth + "px";
-      firework.style.top = Math.random() * window.innerHeight + "px";
-      document.body.appendChild(firework);
-      setTimeout(() => firework.remove(), 1000);
-    }
-    setInterval(createFirework, 800);
-  </script>
-
 </body>
 </html>
