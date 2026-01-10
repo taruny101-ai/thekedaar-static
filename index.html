@@ -1,145 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5ND5KQVH3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-N5ND5KQVH3');
-  </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thekedaar Results</title>
-  <link rel="stylesheet" href="style.css" />
-  <meta http-equiv="refresh" content="30" />
-</head>
+!DOCTYPE html>
+<html lang="en"><head><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-N5ND5KQVH3"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+gtag('config', 'G-N5ND5KQVH3'); </script> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thekedaar Results</title><link rel="stylesheet" href="style.css" /><meta http-equiv="refresh" content="30" /></head>
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="logo"><img src="assets/logo.png" alt="Thekedaar Logo" /></div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="disclaimer.html">Disclaimer</a>
-      <a href="terms-of-service.html">Terms of Service</a>
-    </nav>
-  </header>
-
-  <!-- TITLE -->
-  <h1 id="title">Thekedaar</h1>
-
-  <!-- YEAR DROPDOWN -->
-  <label for="year-select">Select Year:</label>
-  <select id="year-select" onchange="loadResults()">
-    <option value="2022">2022</option>
-    <option value="2023">2023</option>
-    <option value="2024">2024</option>
-    <option value="2025">2025</option>
-    <option value="2026">2026</option>
-  </select>
-
-  <!-- MAIN SCORE -->
-  <div id="main-score" class="main-score">—</div>
-
-  <!-- CIRCLE RESULTS -->
-  <div class="circle-container" id="results"></div>
-
-  <!-- DATE -->
-  <div id="current-date"></div>
-
-  <!-- CHART TAB -->
-  <h2>Chart</h2>
-  <div id="chart-data"></div>
-
-  <!-- GOOGLE SHEETS API -->
-  <script>
-    const apiKey = "AIzaSyA6MZr97k_P2vLEd3izI3F7UZLJMCvE6WA
-      "; // your API key here
-    const sheetId = "1UIFwICEddQE5XtMz_Wod3Gp0H6TQwTvE2TCeXw77-sQ";
-    const chartTab = "chart";
-
-    async function loadResults() {
-      const year = document.getElementById("year-select").value; 
-      const resultsTab = "results_" + year; // assumes each year has its own tab like results_2022, results_2023 etc.
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${resultsTab}?key=${apiKey}`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        const rows = data.values;
-        const container = document.getElementById("results");
-        const mainScore = document.getElementById("main-score");
-        container.innerHTML = "";
-        rows.forEach(row => {
-          const game = row[0];
-          const score = row[1] || "—";
-          if (game?.toLowerCase() === "thekedaar") {
-            mainScore.textContent = score;
-          } else {
-            const circle = document.createElement("div");
-            circle.className = "circle";
-            const name = document.createElement("span");
-            name.textContent = game;
-            const value = document.createElement("span");
-            value.className = "score";
-            value.textContent = score;
-            circle.appendChild(name);
-            circle.appendChild(value);
-            container.appendChild(circle);
-          }
-        });
-      } catch (error) {
-        console.error("Error loading results:", error);
-      }
-    }
-
-    async function loadChart() {
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${chartTab}?key=${apiKey}`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        const rows = data.values;
-        let html = "<table border='1'>";
-        rows.forEach(row => {
-          html += "<tr>";
-          row.forEach(cell => {
-            html += `<td>${cell}</td>`;
-          });
-          html += "</tr>";
-        });
-        html += "</table>";
-        document.getElementById("chart-data").innerHTML = html;
-      } catch (error) {
-        console.error("Error loading chart:", error);
-      }
-    }
-
-    function updateDate() {
-      const now = new Date();
-      const day = String(now.getDate()).padStart(2, '0');
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const year = now.getFullYear();
-      const formatted = `${day}/${month}/${year} IST`;
-      document.getElementById("current-date").textContent = formatted;
-    }
-
-    loadResults();
-    loadChart();
-    updateDate();
-  </script>
-
-  <!-- FIREWORKS -->
-  <script>
-    function createFirework() {
-      const firework = document.createElement("div");
-      firework.classList.add("firework");
-      firework.style.left = Math.random() * window.innerWidth + "px";
-      firework.style.top = Math.random() * window.innerHeight + "px";
-      document.body.appendChild(firework);
-      setTimeout(() => firework.remove(), 1000);
-    }
-    setInterval(createFirework, 800);
-  </script>
-</body>
-</html>
+<!-- HEADER -->
+<header><div class="logo"><img src="assets/logo.png" alt="Thekedaar Logo" /></div><nav><a href="index.html">Home</a><a href="privacy-policy.html">Privacy Policy</a><a href="disclaimer.html">Disclaimer</a><a href="terms-of-service.html">Terms of Service</a></nav></header>
+<!-- TITLE -->
+<h1 id="title">Thekedaar</h1>
+<!-- MAIN SCORE -->
+<div id="main-score" class="main-score">—</div>
+<!-- CIRCLE RESULTS -->
+<div class="circle-container" id="results"></div>
+<!-- DATE -->
+<div id="current-date"></div>
+<!-- CHART TAB -->
+<h2>Chart</h2><div id="chart-data"></div>
+<!-- GOOGLE SHEETS API -->
+<script>const apiKey = "AIzaSyA6MZr97k_P2vLEd3izI3F7UZLJMCvE6WA" // your API key hereconst sheetId = "1UIFwICEddQE5XtMz_Wod3Gp0H6TQwTvE2TCeXw77-sQ";const resultsTab = "results";const chartTab = "chart";async function loadResults() {const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${resultsTab}?key=${apiKey}`;try {const response = await fetch(url);const data = await response.json();const rows = data.values;const container = document.getElementById("results");const mainScore = document.getElementById("main-score");container.innerHTML = "";rows.forEach(row => {const game = row[0];const score = row[1] || "—";if (game?.toLowerCase() === "thekedaar") {mainScore.textContent = score;} else {const circle = document.createElement("div");circle.className = "circle";const name = document.createElement("span");name.textContent = game;const value = document.createElement("span");value.className = "score";value.textContent = score;circle.appendChild(name);circle.appendChild(value);container.appendChild(circle);}});} catch (error) {console.error("Error loading results:", error);}}async function loadChart() {const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${chartTab}?key=${apiKey}`;try {const response = await fetch(url);const data = await response.json();const rows = data.values;let html = "<table border='1'>";rows.forEach(row => {html += "<tr>";row.forEach(cell => {html += `<td>${cell}</td>`;});html += "</tr>";});html += "</table>";document.getElementById("chart-data").innerHTML = html;} catch (error) {console.error("Error loading chart:", error);}}function updateDate() {const now = new Date();const day = String(now.getDate()).padStart(2, '0');const month = String(now.getMonth() + 1).padStart(2, '0');const year = now.getFullYear();const formatted = `${day}/${month}/${year} IST`;document.getElementById("current-date").textContent = formatted;}loadResults();loadChart();updateDate();</script>
+<!-- FIREWORKS -->
+<script>function createFirework() {const firework = document.createElement("div");firework.classList.add("firework");firework.style.left = Math.random() * window.innerWidth + "px";firework.style.top = Math.random() * window.innerHeight + "px";document.body.appendChild(firework);setTimeout(() => firework.remove(), 1000);}setInterval(createFirework, 800);</script>
+</body></html>
