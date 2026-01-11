@@ -42,12 +42,7 @@
   <!-- CHART TAB -->
   <h2>
     Chart
-    <select id="year-select">
-      <option value="2023">2023</option>
-      <option value="2024">2024</option>
-      <option value="2025">2025</option>
-      <option value="2026">2026</option>
-    </select>
+    <select id="year-select"></select>
   </h2>
   <div id="chart-data"></div>
 
@@ -123,15 +118,31 @@
       document.getElementById("current-date").textContent = formatted;
     }
 
+    // Populate dropdown dynamically
+    function populateYearDropdown(startYear = 2023) {
+      const currentYear = new Date().getFullYear();
+      const select = document.getElementById("year-select");
+      select.innerHTML = "";
+      for (let y = startYear; y <= currentYear; y++) {
+        const option = document.createElement("option");
+        option.value = y;
+        option.textContent = y;
+        select.appendChild(option);
+      }
+      // Set default to current year
+      select.value = currentYear;
+    }
+
     // Event listener for dropdown
     document.getElementById("year-select").addEventListener("change", function() {
       loadChart(this.value);
     });
 
-    // Initial load
+    // Initial load with dynamic year
+    const currentYear = new Date().getFullYear();
+    populateYearDropdown(2023);
     loadResults();
-    loadChart(2026); // default year
-    document.getElementById("year-select").value = "2026"; // set dropdown to 2026
+    loadChart(currentYear); // default to current year
     updateDate();
   </script>
 
