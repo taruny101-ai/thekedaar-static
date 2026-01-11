@@ -188,26 +188,38 @@ PREMIUM TABLE STYLING
 }
 
 /* ----------------------------------------------
-DROPDOWN (MATCHES CHART HEADER SIZE)
+CHART + DROPDOWN CONTROLS
 ---------------------------------------------- */
-select {
-  display: block;
+.chart-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   margin: 20px auto;
-  width: 180px; /* ✅ Matches approx width of "CHART" header */
-  padding: 12px 16px;
+}
+
+.chart-label {
   font-size: 18px;
   font-weight: 600;
-  text-align: center;
+  color: #FFD700;
+  text-transform: uppercase;
+}
+
+/* SIMPLE DROPDOWN */
+select {
+  padding: 10px 14px;
+  font-size: 16px;
+  font-weight: 600;
   color: #000;
-  background: linear-gradient(90deg, #FFD700, #FFA500);
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+  background: #fff; /* plain white */
+  border: 1px solid #ccc;
+  border-radius: 6px;
   cursor: pointer;
+  box-shadow: none; /* remove glow/fancy effects */
 }
 
 select:hover {
-  background: linear-gradient(90deg, #FFA500, #FFD700);
+  background: #f9f9f9; /* subtle hover */
 }
 
 /* ----------------------------------------------
@@ -247,10 +259,13 @@ RESPONSIVE
     padding: 10px;
   }
 
-  select {
-    width: 140px; /* ✅ Adjusted for mobile */
+  .chart-label {
     font-size: 16px;
-    padding: 10px;
+  }
+
+  select {
+    font-size: 14px;
+    padding: 8px 12px;
   }
 }
 
