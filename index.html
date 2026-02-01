@@ -15,77 +15,159 @@
   <meta http-equiv="refresh" content="30" />
 
   <style>
-    /* MAIN SCORE */
-    .main-score {
+    /* BASE */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0A0A0A;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
       display: flex;
       flex-direction: column;
-      align-items: center; /* Morning centered */
-      gap: 10px;
-      margin-top: 20px;
+      align-items: center;
+      padding: 15px;
+      background-color: rgba(30, 58, 138, 0.85);
     }
-
-    .morning-row {
-      font-size: 1.4em;
-      font-weight: bold;
-      text-align: center;
+    .logo img {
+      width: 150px;
+      height: auto;
+      margin-bottom: 10px;
     }
-
-    .evening-row {
-      width: 100%;
+    nav {
       display: flex;
-      justify-content: space-between; /* label left, score right */
-      font-size: 1.2em;
-      padding: 5px 10px;
+      gap: 15px;
     }
-
-    .label {
-      font-weight: bold;
+    nav a {
+      color: #FBBF24;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
     }
+    nav a:hover { text-decoration: underline; }
 
-    .score {
-      color: #333;
-    }
-
-    /* CHART TABLE */
-    .chart-table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    .chart-table td {
-      border: 1px solid #ccc;
-      padding: 5px;
+    /* TITLE */
+    #title {
       text-align: center;
+      font-size: 3em;
+      margin-top: 40px;
+      background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc, #ffcc00);
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: shimmer 3s linear infinite, glow 1.5s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 10px #fff, 0 0 20px #ff00cc, 0 0 30px #3333ff; }
+      50% { text-shadow: 0 0 20px #fff, 0 0 30px #00ffcc, 0 0 40px #ffcc00; }
     }
 
-    .morning-cell {
-      background-color: #f0f8ff;
-      font-weight: bold;
+    /* MAIN SCORE */
+    .main-score {
+      text-align: center;
+      font-size: 2.5em;
+      font-weight: 900;
+      color: gold;
+      margin-top: 20px;
+      text-shadow: 0 0 10px gold, 0 0 20px #ffcc00, 0 0 30px #ffaa00;
+    }
+    .morning {
+      color: #00ffff;
+      font-size: 2em;
+      font-weight: 900;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #33ccff, 0 0 30px #66ffff;
+      margin: 10px 0;
+    }
+    .evening {
+      color: #ff66cc;
+      font-size: 2em;
+      font-weight: 900;
+      text-shadow: 0 0 10px #ff66cc, 0 0 20px #ff3399, 0 0 30px #ff99cc;
+      margin: 10px 0;
     }
 
-    .evening-cell {
-      background-color: #fff0f5;
-      font-weight: bold;
-    }
-
-    /* CIRCLE RESULTS */
+    /* CIRCLES */
     .circle-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px 20px;
     }
-
     .circle {
-      border: 2px solid #333;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      width: 100px;
-      height: 100px;
+      background: #ADD8E6;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+      transition: transform 0.3s ease;
+      color: black;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      font-size: 0.9em;
+      justify-content: center;
+      text-align: center;
+      font-weight: bold;
+      font-size: 15px;
+    }
+    .circle:hover { transform: scale(1.1); }
+    .score { font-size: 20px; font-weight: 900; margin-top: 5px; }
+
+    /* DATE */
+    #current-date {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 900;
+      color: gold;
+      margin-top: 60px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px gold;
+    }
+
+    /* CHART */
+    #chart-data table {
+      width: 90%;
+      margin: 40px auto;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+    }
+    #chart-data th, #chart-data td {
+      padding: 14px 20px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      color: #f1f1f1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    #chart-data th {
+      background: linear-gradient(90deg, #FFD700, #FFA500);
+      color: #000;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    }
+    .morning-cell {
+      color: #00ffff;
+      font-weight: 900;
+      text-shadow: 0 0 8px #00ffff, 0 0 16px #33ccff;
+    }
+    .evening-cell {
+      color: #ff66cc;
+      font-weight: 900;
+      text-shadow: 0 0 8px #ff66cc, 0 0 16px #ff3399;
     }
 
     /* FIREWORKS */
@@ -93,14 +175,27 @@
       position: absolute;
       width: 6px;
       height: 6px;
-      background: red;
+      background: white;
       border-radius: 50%;
-      animation: explode 1s ease-out forwards;
+      pointer-events: none;
+      animation: burst 1s ease-out forwards;
     }
-
-    @keyframes explode {
-      from { transform: scale(0.5); opacity: 1; }
-      to { transform: scale(2); opacity: 0; }
+    @keyframes burst {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+    .firework::after {
+      content: "✦";
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      font-size: 12px;
+      color: gold;
+      animation: sparkle 1s ease-out forwards;
+    }
+    @keyframes sparkle {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(2); }
     }
   </style>
 </head>
@@ -152,21 +247,20 @@
         container.innerHTML = "";
         mainScore.innerHTML = "";
 
-        rows.slice(1).forEach(row => {
+        rows.forEach(row => {   // ✅ no slice(1), so Morning row is included
           const game = row[0];
           const score = row[1] || "—";
 
-          if (game?.toLowerCase() === "thekedaar morning") {
+          if (game && game.toLowerCase() === "thekedaar morning") {
             mainScore.innerHTML += `
-              <div class="morning-row">
+              <div class="morning">
                 Thekedaar Morning: <span class="score">${score}</span>
               </div>
             `;
-          } else if (game?.toLowerCase() === "thekedaar evening") {
+          } else if (game && game.toLowerCase() === "thekedaar evening") {
             mainScore.innerHTML += `
-              <div class="evening-row">
-                <span class="label">Thekedaar Evening:</span>
-                <span class="score">${score}</span>
+              <div class="evening">
+                Thekedaar Evening: <span class="score">${score}</span>
               </div>
             `;
           } else {
