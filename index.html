@@ -12,8 +12,97 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thekedaar Results</title>
-  <link rel="stylesheet" href="style.css" />
   <meta http-equiv="refresh" content="30" />
+
+  <style>
+    /* MAIN SCORE */
+    .main-score {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Morning centered */
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .morning-row {
+      font-size: 1.4em;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .evening-row {
+      width: 100%;
+      display: flex;
+      justify-content: space-between; /* label left, score right */
+      font-size: 1.2em;
+      padding: 5px 10px;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+
+    .score {
+      color: #333;
+    }
+
+    /* CHART TABLE */
+    .chart-table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .chart-table td {
+      border: 1px solid #ccc;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .morning-cell {
+      background-color: #f0f8ff;
+      font-weight: bold;
+    }
+
+    .evening-cell {
+      background-color: #fff0f5;
+      font-weight: bold;
+    }
+
+    /* CIRCLE RESULTS */
+    .circle-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .circle {
+      border: 2px solid #333;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9em;
+    }
+
+    /* FIREWORKS */
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: red;
+      border-radius: 50%;
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      from { transform: scale(0.5); opacity: 1; }
+      to { transform: scale(2); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
   <!-- HEADER -->
@@ -45,8 +134,7 @@
     <select id="year-select"></select>
   </h2>
   <div id="chart-data"></div>
-
-  <!-- GOOGLE SHEETS API -->
+    <!-- GOOGLE SHEETS API -->
   <script>
     const apiKey = "AIzaSyA6MZr97k_P2vLEd3izI3F7UZLJMCvE6WA"; // your API key here
     const sheetId = "1UIFwICEddQE5XtMz_Wod3Gp0H6TQwTvE2TCeXw77-sQ";
@@ -64,14 +152,23 @@
         container.innerHTML = "";
         mainScore.innerHTML = "";
 
-        rows.slice(1).forEach(row => { // skip header if present
+        rows.slice(1).forEach(row => {
           const game = row[0];
           const score = row[1] || "—";
 
           if (game?.toLowerCase() === "thekedaar morning") {
-            mainScore.innerHTML += `<div class="morning">Morning: ${score}</div>`;
+            mainScore.innerHTML += `
+              <div class="morning-row">
+                Thekedaar Morning: <span class="score">${score}</span>
+              </div>
+            `;
           } else if (game?.toLowerCase() === "thekedaar evening") {
-            mainScore.innerHTML += `<div class="evening">Evening: ${score}</div>`;
+            mainScore.innerHTML += `
+              <div class="evening-row">
+                <span class="label">Thekedaar Evening:</span>
+                <span class="score">${score}</span>
+              </div>
+            `;
           } else {
             const circle = document.createElement("div");
             circle.className = "circle";
@@ -93,7 +190,7 @@
 
     // Load Chart by Year
     async function loadChart(year) {
-      const chartTab = `chart_${year}`; // expects sheet tabs named chart_2023, chart_2024, etc.
+      const chartTab = `chart_${year}`;
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${chartTab}?key=${apiKey}`;
       try {
         const response = await fetch(url);
@@ -103,9 +200,9 @@
         rows.forEach((row, index) => {
           html += "<tr>";
           row.forEach((cell, i) => {
-            if (i === 1 && index > 0) { // Morning column
+            if (i === 1 && index > 0) {
               html += `<td class="morning-cell">${cell}</td>`;
-            } else if (i === 2 && index > 0) { // Evening column
+            } else if (i === 2 && index > 0) {
               html += `<td class="evening-cell">${cell}</td>`;
             } else {
               html += `<td>${cell}</td>`;
@@ -142,7 +239,6 @@
         option.textContent = y;
         select.appendChild(option);
       }
-      // Set default to current year
       select.value = currentYear;
     }
 
@@ -151,11 +247,11 @@
       loadChart(this.value);
     });
 
-    // Initial load with dynamic year
+    // Initial load
     const currentYear = new Date().getFullYear();
     populateYearDropdown(2023);
     loadResults();
-    loadChart(currentYear); // default to current year
+    loadChart(currentYear);
     updateDate();
   </script>
 
@@ -169,6 +265,7 @@
       document.body.appendChild(firework);
       setTimeout(() => firework.remove(), 1000);
     }
+
     setInterval(() => {
       if (document.querySelectorAll(".firework").length < 20) {
         createFirework();
