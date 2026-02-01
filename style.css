@@ -79,6 +79,7 @@ MAIN SCORE (Morning left, Evening right)
 .score-wrapper {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start; /* ensures label/value stack neatly */
 }
 
 .score-block {
@@ -86,10 +87,16 @@ MAIN SCORE (Morning left, Evening right)
   text-align: center;
 }
 
-.score-block .label,
+.score-block .label {
+  display: block;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 .score-block .value {
   display: block;
-  font-size: 2em; /* same size for label and result */
+  margin-top: 4px;
+  font-size: 2em;
   font-weight: 900;
 }
 
@@ -269,13 +276,20 @@ RESPONSIVE
     width: 100%;
   }
 
+  /* Keep morning/evening side by side even on mobile */
   .score-wrapper {
-    flex-direction: column; /* stack morning/evening vertically */
+    flex-direction: row;
+    justify-content: space-between;
   }
 
-  .score-block .label,
+  .score-block .label {
+    font-size: 1em;
+    font-weight: bold;
+  }
+
   .score-block .value {
     font-size: 1.5em;
+    font-weight: 900;
   }
 
   #current-date {
