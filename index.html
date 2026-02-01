@@ -112,8 +112,7 @@
         document.getElementById("results").innerHTML = "<p>Unable to load results. Please try again later.</p>";
       }
     }
-
-    // Load Chart by Year
+        // Load Chart by Year
     async function loadChart(year) {
       const chartTab = `chart_${year}`;
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${chartTab}?key=${apiKey}`;
@@ -122,19 +121,30 @@
         const data = await response.json();
         const rows = data.values;
         let html = "<table class='chart-table'>";
+
         rows.forEach((row, index) => {
           html += "<tr>";
           row.forEach((cell, i) => {
-            if (i === 1 && index > 0) {
-              html += `<td class="morning-cell">${cell}</td>`;
-            } else if (i === 2 && index > 0) {
-              html += `<td class="evening-cell">${cell}</td>`;
+            if (index === 0) {
+              // Header row
+              html += `<th>${cell}</th>`;
             } else {
-              html += `<td>${cell}</td>`;
+              if (i >= 2) {
+                // From column 3 onward (i=2 zero-based), alternate Morning/Evening
+                if ((i % 2) === 0) {
+                  html += `<td class="morning-cell">${cell}</td>`;
+                } else {
+                  html += `<td class="evening-cell">${cell}</td>`;
+                }
+              } else {
+                // First two columns (Date + January) stay plain
+                html += `<td>${cell}</td>`;
+              }
             }
           });
           html += "</tr>";
         });
+
         html += "</table>";
         document.getElementById("chart-data").innerHTML = html;
       } catch (error) {
