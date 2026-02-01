@@ -62,11 +62,16 @@
         const container = document.getElementById("results");
         const mainScore = document.getElementById("main-score");
         container.innerHTML = "";
-        rows.forEach(row => {
+        mainScore.innerHTML = "";
+
+        rows.slice(1).forEach(row => { // skip header if present
           const game = row[0];
           const score = row[1] || "—";
-          if (game?.toLowerCase() === "thekedaar") {
-            mainScore.textContent = score;
+
+          if (game?.toLowerCase() === "thekedaar morning") {
+            mainScore.innerHTML += `<div class="morning">Morning: ${score}</div>`;
+          } else if (game?.toLowerCase() === "thekedaar evening") {
+            mainScore.innerHTML += `<div class="evening">Evening: ${score}</div>`;
           } else {
             const circle = document.createElement("div");
             circle.className = "circle";
@@ -82,6 +87,7 @@
         });
       } catch (error) {
         console.error("Error loading results:", error);
+        document.getElementById("results").innerHTML = "<p>Unable to load results. Please try again later.</p>";
       }
     }
 
@@ -93,11 +99,17 @@
         const response = await fetch(url);
         const data = await response.json();
         const rows = data.values;
-        let html = "<table border='1'>";
-        rows.forEach(row => {
+        let html = "<table class='chart-table'>";
+        rows.forEach((row, index) => {
           html += "<tr>";
-          row.forEach(cell => {
-            html += `<td>${cell}</td>`;
+          row.forEach((cell, i) => {
+            if (i === 1 && index > 0) { // Morning column
+              html += `<td class="morning-cell">${cell}</td>`;
+            } else if (i === 2 && index > 0) { // Evening column
+              html += `<td class="evening-cell">${cell}</td>`;
+            } else {
+              html += `<td>${cell}</td>`;
+            }
           });
           html += "</tr>";
         });
@@ -105,6 +117,7 @@
         document.getElementById("chart-data").innerHTML = html;
       } catch (error) {
         console.error("Error loading chart:", error);
+        document.getElementById("chart-data").innerHTML = "<p>Unable to load chart data. Please try again later.</p>";
       }
     }
 
@@ -156,7 +169,11 @@
       document.body.appendChild(firework);
       setTimeout(() => firework.remove(), 1000);
     }
-    setInterval(createFirework, 800);
+    setInterval(() => {
+      if (document.querySelectorAll(".firework").length < 20) {
+        createFirework();
+      }
+    }, 800);
   </script>
 </body>
 </html>
