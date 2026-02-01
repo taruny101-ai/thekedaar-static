@@ -44,11 +44,11 @@ nav a:hover {
 }
 
 /* ----------------------------------------------
-HOMEPAGE TITLE (ONLY THIS GLOWS)
+HOMEPAGE TITLE (BIGGER THAN MORNING/EVENING)
 ---------------------------------------------- */
 #title {
   text-align: center;
-  font-size: 3em;
+  font-size: 4em; /* bigger than morning/evening */
   margin-top: 40px;
   background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc, #ffcc00);
   background-size: 200% auto;
@@ -69,57 +69,40 @@ HOMEPAGE TITLE (ONLY THIS GLOWS)
 }
 
 /* ----------------------------------------------
-LEGAL PAGE TITLES (NO GLOW)
----------------------------------------------- */
-.legal-title {
-  text-align: center;
-  font-size: 2.5em;
-  margin-top: 40px;
-  color: #FBBF24;
-  text-shadow: none !important;
-  animation: none !important;
-}
-
-/* ----------------------------------------------
-MAIN SCORE
+MAIN SCORE (Morning left, Evening right)
 ---------------------------------------------- */
 .main-score {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px auto;
+  width: 80%;
+}
+
+.score-block {
+  flex: 1;
   text-align: center;
-  font-size: 2.5em;
-  font-weight: 900;
-  color: gold;
-  margin-top: 20px;
-  text-shadow:
-      0 0 10px gold,
-      0 0 20px #ffcc00,
-      0 0 30px #ffaa00;
 }
 
-/* ----------------------------------------------
-MORNING vs EVENING RESULTS
----------------------------------------------- */
-.morning {
-  color: #00ffff; /* cyan glow for morning */
-  font-size: 2em;
+.score-block .label,
+.score-block .value {
+  display: block;
+  font-size: 2em; /* same size for label and result */
   font-weight: 900;
-  text-shadow:
-    0 0 10px #00ffff,
-    0 0 20px #33ccff,
-    0 0 30px #66ffff;
-  margin: 10px 0;
 }
 
-.evening {
-  color: #ff66cc; /* magenta glow for evening */
-  font-size: 2em;
-  font-weight: 900;
-  text-shadow:
-    0 0 10px #ff66cc,
-    0 0 20px #ff3399,
-    0 0 30px #ff99cc;
-  margin: 10px 0;
+/* Morning glow */
+.morning .label,
+.morning .value {
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #33ccff, 0 0 30px #66ffff;
 }
 
+/* Evening glow */
+.evening .label,
+.evening .value {
+  color: #ff66cc;
+  text-shadow: 0 0 10px #ff66cc, 0 0 20px #ff3399, 0 0 30px #ff99cc;
+}
 /* ----------------------------------------------
 CIRCLE LAYOUT
 ---------------------------------------------- */
@@ -152,7 +135,7 @@ CIRCLE LAYOUT
   transform: scale(1.1);
 }
 
-.score {
+.circle .score {
   font-size: 20px;
   font-weight: 900;
   margin-top: 5px;
@@ -170,6 +153,7 @@ DATE
   margin-bottom: 20px;
   text-shadow: 0 0 10px gold;
 }
+
 /* ----------------------------------------------
 PREMIUM TABLE STYLING
 ---------------------------------------------- */
@@ -183,7 +167,7 @@ PREMIUM TABLE STYLING
   box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
 }
 
-#chart-data th, 
+#chart-data th,
 #chart-data td {
   padding: 14px 20px;
   text-align: center;
@@ -274,12 +258,18 @@ RESPONSIVE
     font-size: 12px;
   }
 
-  .score {
+  .circle .score {
     font-size: 16px;
   }
 
   .main-score {
-    font-size: 2em;
+    flex-direction: column; /* stack morning/evening vertically on small screens */
+    width: 100%;
+  }
+
+  .score-block .label,
+  .score-block .value {
+    font-size: 1.5em;
   }
 
   #current-date {
@@ -291,7 +281,7 @@ RESPONSIVE
     font-size: 14px;
   }
 
-  #chart-data th, 
+  #chart-data th,
   #chart-data td {
     padding: 10px;
   }
@@ -320,13 +310,13 @@ FIREWORK PARTICLES
 }
 
 @keyframes burst {
-  0% { 
-    transform: scale(1); 
-    opacity: 1; 
+  0% {
+    transform: scale(1);
+    opacity: 1;
   }
-  100% { 
-    transform: scale(2); 
-    opacity: 0; 
+  100% {
+    transform: scale(2);
+    opacity: 0;
   }
 }
 
@@ -341,12 +331,12 @@ FIREWORK PARTICLES
 }
 
 @keyframes sparkle {
-  0% { 
-    opacity: 1; 
-    transform: scale(1); 
+  0% {
+    opacity: 1;
+    transform: scale(1);
   }
-  100% { 
-    opacity: 0; 
-    transform: scale(2); 
+  100% {
+    opacity: 0;
+    transform: scale(2);
   }
 }
