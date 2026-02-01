@@ -96,6 +96,31 @@ MAIN SCORE
 }
 
 /* ----------------------------------------------
+MORNING vs EVENING RESULTS
+---------------------------------------------- */
+.morning {
+  color: #00ffff; /* cyan glow for morning */
+  font-size: 2em;
+  font-weight: 900;
+  text-shadow:
+    0 0 10px #00ffff,
+    0 0 20px #33ccff,
+    0 0 30px #66ffff;
+  margin: 10px 0;
+}
+
+.evening {
+  color: #ff66cc; /* magenta glow for evening */
+  font-size: 2em;
+  font-weight: 900;
+  text-shadow:
+    0 0 10px #ff66cc,
+    0 0 20px #ff3399,
+    0 0 30px #ff99cc;
+  margin: 10px 0;
+}
+
+/* ----------------------------------------------
 CIRCLE LAYOUT
 ---------------------------------------------- */
 .circle-container {
@@ -145,7 +170,6 @@ DATE
   margin-bottom: 20px;
   text-shadow: 0 0 10px gold;
 }
-
 /* ----------------------------------------------
 PREMIUM TABLE STYLING
 ---------------------------------------------- */
@@ -185,6 +209,19 @@ PREMIUM TABLE STYLING
 
 #chart-data tr:last-child td {
   border-bottom: none;
+}
+
+/* Morning & Evening cells in chart */
+.morning-cell {
+  color: #00ffff;
+  font-weight: 900;
+  text-shadow: 0 0 8px #00ffff, 0 0 16px #33ccff;
+}
+
+.evening-cell {
+  color: #ff66cc;
+  font-weight: 900;
+  text-shadow: 0 0 8px #ff66cc, 0 0 16px #ff3399;
 }
 
 /* ----------------------------------------------
@@ -283,8 +320,14 @@ FIREWORK PARTICLES
 }
 
 @keyframes burst {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(2); opacity: 0; }
+  0% { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: scale(2); 
+    opacity: 0; 
+  }
 }
 
 .firework::after {
@@ -298,6 +341,12 @@ FIREWORK PARTICLES
 }
 
 @keyframes sparkle {
-  0% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(2); }
+  0% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+  100% { 
+    opacity: 0; 
+    transform: scale(2); 
+  }
 }
