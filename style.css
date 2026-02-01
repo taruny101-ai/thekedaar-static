@@ -44,11 +44,11 @@ nav a:hover {
 }
 
 /* ----------------------------------------------
-HOMEPAGE TITLE (BIGGER THAN MORNING/EVENING)
+MAIN TITLE (BIGGER THAN MORNING/EVENING)
 ---------------------------------------------- */
 #title {
   text-align: center;
-  font-size: 4em; /* bigger than morning/evening */
+  font-size: 4em; /* larger than morning/evening */
   margin-top: 40px;
   background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc, #ffcc00);
   background-size: 200% auto;
@@ -72,10 +72,13 @@ HOMEPAGE TITLE (BIGGER THAN MORNING/EVENING)
 MAIN SCORE (Morning left, Evening right)
 ---------------------------------------------- */
 .main-score {
-  display: flex;
-  justify-content: space-between;
   margin: 40px auto;
   width: 80%;
+}
+
+.score-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
 .score-block {
@@ -263,8 +266,11 @@ RESPONSIVE
   }
 
   .main-score {
-    flex-direction: column; /* stack morning/evening vertically on small screens */
     width: 100%;
+  }
+
+  .score-wrapper {
+    flex-direction: column; /* stack morning/evening vertically */
   }
 
   .score-block .label,
