@@ -1,211 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5ND5KQVH3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-N5ND5KQVH3');
-  </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thekedaar Results</title>
-  <meta http-equiv="refresh" content="30" />
-  <!-- CSS will be linked separately -->
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Site Under Maintenance</title>
+  <style>
+    body { 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      height: 100vh; 
+      font-family: Arial, sans-serif; 
+      background: #f4f4f4; 
+    }
+    .message {
+      text-align: center;
+      padding: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="logo"><img src="assets/logo.png" alt="Thekedaar Logo" /></div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="disclaimer.html">Disclaimer</a>
-      <a href="terms-of-service.html">Terms of Service</a>
-    </nav>
-  </header>
-
-  <!-- TITLE -->
-  <h1 id="title">Thekedaar</h1>
-
-  <!-- MAIN SCORE (Morning left, Evening right) -->
-  <div id="main-score" class="main-score"></div>
-
-  <!-- CIRCLE RESULTS -->
-  <div class="circle-container" id="results"></div>
-
-  <!-- DATE -->
-  <div id="current-date"></div>
-
-  <!-- CHART TAB -->
-  <h2>
-    Chart
-    <select id="year-select"></select>
-  </h2>
-  <div id="chart-data"></div>
-
-  <!-- GOOGLE SHEETS API -->
-  <script>
-    const apiKey = "AIzaSyA6MZr97k_P2vLEd3izI3F7UZLJMCvE6WA"; // your API key here
-    const sheetId = "1UIFwICEddQE5XtMz_Wod3Gp0H6TQwTvE2TCeXw77-sQ";
-    const resultsTab = "results";
-
-    // Load Results
-    async function loadResults() {
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${resultsTab}?key=${apiKey}`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        const rows = data.values;
-        const container = document.getElementById("results");
-        const mainScore = document.getElementById("main-score");
-        container.innerHTML = "";
-        mainScore.innerHTML = "";
-
-        // Create flex container for morning/evening
-        const scoreWrapper = document.createElement("div");
-        scoreWrapper.className = "score-wrapper";
-
-        let morningBlock = "";
-        let eveningBlock = "";
-
-        rows.forEach(row => {
-          const game = row[0];
-          const score = row[1] || "—";
-
-          if (game && game.toLowerCase() === "thekedaar morning") {
-            morningBlock = `
-              <div class="score-block morning">
-                <span class="label">Thekedaar Morning</span>
-                <span class="value">${score}</span>
-              </div>
-            `;
-          } else if (game && game.toLowerCase() === "thekedaar evening") {
-            eveningBlock = `
-              <div class="score-block evening">
-                <span class="label">Thekedaar Evening</span>
-                <span class="value">${score}</span>
-              </div>
-            `;
-          } else {
-            const circle = document.createElement("div");
-            circle.className = "circle";
-            const name = document.createElement("span");
-            name.textContent = game;
-            const value = document.createElement("span");
-            value.className = "score";
-            value.textContent = score;
-            circle.appendChild(name);
-            circle.appendChild(value);
-            container.appendChild(circle);
-          }
-        });
-
-        scoreWrapper.innerHTML = morningBlock + eveningBlock;
-        mainScore.appendChild(scoreWrapper);
-
-      } catch (error) {
-        console.error("Error loading results:", error);
-        document.getElementById("results").innerHTML = "<p>Unable to load results. Please try again later.</p>";
-      }
-    }
-        // Load Chart by Year
-    async function loadChart(year) {
-      const chartTab = `chart_${year}`;
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${chartTab}?key=${apiKey}`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        const rows = data.values;
-        let html = "<table class='chart-table'>";
-
-        rows.forEach((row, index) => {
-          html += "<tr>";
-          row.forEach((cell, i) => {
-            if (index === 0) {
-              // Header row
-              html += `<th>${cell}</th>`;
-            } else {
-              if (i >= 2) {
-                // From column 3 onward (i=2 zero-based), alternate Morning/Evening
-                if ((i % 2) === 0) {
-                  html += `<td class="morning-cell">${cell}</td>`;
-                } else {
-                  html += `<td class="evening-cell">${cell}</td>`;
-                }
-              } else {
-                // First two columns (Date + January) stay plain
-                html += `<td>${cell}</td>`;
-              }
-            }
-          });
-          html += "</tr>";
-        });
-
-        html += "</table>";
-        document.getElementById("chart-data").innerHTML = html;
-      } catch (error) {
-        console.error("Error loading chart:", error);
-        document.getElementById("chart-data").innerHTML = "<p>Unable to load chart data. Please try again later.</p>";
-      }
-    }
-
-    // Date updater
-    function updateDate() {
-      const now = new Date();
-      const day = String(now.getDate()).padStart(2, '0');
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const year = now.getFullYear();
-      const formatted = `${day}/${month}/${year} IST`;
-      document.getElementById("current-date").textContent = formatted;
-    }
-
-    // Populate dropdown dynamically
-    function populateYearDropdown(startYear = 2023) {
-      const currentYear = new Date().getFullYear();
-      const select = document.getElementById("year-select");
-      select.innerHTML = "";
-      for (let y = startYear; y <= currentYear; y++) {
-        const option = document.createElement("option");
-        option.value = y;
-        option.textContent = y;
-        select.appendChild(option);
-      }
-      select.value = currentYear;
-    }
-
-    // Event listener for dropdown
-    document.getElementById("year-select").addEventListener("change", function() {
-      loadChart(this.value);
-    });
-
-    // Initial load
-    const currentYear = new Date().getFullYear();
-    populateYearDropdown(2023);
-    loadResults();
-    loadChart(currentYear);
-    updateDate();
-  </script>
-
-  <!-- FIREWORKS -->
-  <script>
-    function createFirework() {
-      const firework = document.createElement("div");
-      firework.classList.add("firework");
-      firework.style.left = Math.random() * window.innerWidth + "px";
-      firework.style.top = Math.random() * window.innerHeight + "px";
-      document.body.appendChild(firework);
-      setTimeout(() => firework.remove(), 1000);
-    }
-
-    setInterval(() => {
-      if (document.querySelectorAll(".firework").length < 20) {
-        createFirework();
-      }
-    }, 800);
-  </script>
+  <div class="message">
+    <h1>We’ll be back soon!</h1>
+    <p>Thekedaar is temporarily closed for maintenance. Please check back later.</p>
+  </div>
 </body>
 </html>
